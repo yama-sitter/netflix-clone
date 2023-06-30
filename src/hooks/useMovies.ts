@@ -11,7 +11,7 @@ function useMovies(fetcher: () => Promise<Movie[]>) {
 			const movies = await fetcher();
 			setMovies(movies);
 		})();
-	}, [api]);
+	}, [fetcher]);
 
 	return movies;
 }
