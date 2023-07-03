@@ -1,12 +1,12 @@
-import { Movie } from "../../types";
+import { MoviesResource } from "../../types";
 
 export type Props = {
 	title: string;
-	movies: Movie[];
+	resource: MoviesResource;
 	isLargeRow?: string;
 };
 
-export function Movies({ title, movies }: Props) {
-	// console.log(movies);
+export function Movies({ title, resource }: Props) {
+	console.log(resource.getOrThrow());
 	return <div className="Row" />;
 }

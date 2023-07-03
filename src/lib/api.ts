@@ -1,17 +1,22 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { MovieResponse, MovieResponseRow, Movie } from "../types";
+import { createClient, Config } from "./api-client";
+import {
+	MovieResponse,
+	MovieResponseRow,
+	Movie,
+	MoviesResource,
+} from "../types";
+import { Loadable } from "./loadable";
+
+type Params = {
+	api_key?: string;
+} & Config["params"];
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 
-const client = axios.create({
+const client = createClient({
 	baseURL: BASE_URL,
 });
-
-type Params = {
-	api_key?: string;
-} & AxiosRequestConfig["params"];
-
 const defaultParams: Params = {
 	api_key: API_KEY,
 };
@@ -34,17 +39,16 @@ function convertResultToMovie({
 	};
 }
 
-async function fetchMovies(
-	path: string,
-	params: Params = {},
-): Promise<Movie[]> {
-	const response = await client.get<MovieResponse>(path, {
-		params: {
-			...defaultParams,
-			...params,
-		},
-	});
-	return response.data.results.map(convertResultToMovie);
+function fetchMovies(path: string, params: Params = {}): MoviesResource {
+	const promise = client
+		.get<MovieResponse>(path, {
+			params: {
+				...defaultParams,
+				...params,
+			},
+		})
+		.then(({ data }) => data.results.map(convertResultToMovie));
+	return new Loadable(promise);
 }
 
 export function fetchNetflixOriginalMovies() {

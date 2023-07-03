@@ -1,3 +1,5 @@
+import { Loadable } from "./lib/loadable";
+
 type SnakeToCamelCase<T extends string> = T extends `${infer R}_${infer U}`
 	? `${R}${Capitalize<SnakeToCamelCase<U>>}`
 	: T;
@@ -22,3 +24,5 @@ export type MovieResponseRow = {
 };
 export type MovieResponse = Response<MovieResponseRow[]>;
 export type Movie = SnakeToCamel<MovieResponseRow>;
+
+export type MoviesResource = Loadable<Movie[]>;

@@ -1,38 +1,53 @@
+import { Suspense, PropsWithChildren } from "react";
 import { Movies as PresentationalMovies } from "../presentation/Movies";
-import * as hooks from "../../hooks/useMovies";
-import type { UseMoviesFn } from "../../hooks/useMovies";
+import * as api from "../../lib/api";
+import type { MoviesResource } from "../../types";
 
-function renderMovies(title: string, useMoviesFn: UseMoviesFn) {
-	const movies = useMoviesFn();
-	return <PresentationalMovies title={title} movies={movies} />;
+const netflixOriginalMoviesResource = api.fetchNetflixOriginalMovies();
+const trendMoviesResource = api.fetchTrendMovies();
+const topRatedMoviesResource = api.fetchTopRatedMovies();
+const actionMoviesResource = api.fetchActionMovies();
+const comedyMoviesResource = api.fetchComedyMovies();
+const horrorMoviesResource = api.fetchHorrorMovies();
+const romanceMoviesResource = api.fetchRomanceMovies();
+const documentMoviesResource = api.fetchDocumentMovies();
+
+function MoviesWrapper({ children }: PropsWithChildren) {
+	return <Suspense fallback={<div>loading...</div>}>{children}</Suspense>;
 }
 
-function NetflixOriginalMovies() {
-	return renderMovies(
-		"Netflix Original Movies",
-		hooks.useNetflixOriginalMovies,
+function renderMovies(title: string, resource: MoviesResource) {
+	return (
+		<MoviesWrapper>
+			<PresentationalMovies title={title} resource={resource} />
+		</MoviesWrapper>
 	);
 }
+
+export function NetflixOriginalMovies() {
+	return renderMovies("Netflix Original Movies", netflixOriginalMoviesResource);
+}
+
 function TrendMovies() {
-	return renderMovies("Trend Movies", hooks.useTrendMovies);
+	return renderMovies("Trend Movies", trendMoviesResource);
 }
 function TopRatedMovies() {
-	return renderMovies("Top Rated Movies", hooks.useTopRatedMovies);
+	return renderMovies("Top Rated Movies", topRatedMoviesResource);
 }
 function ActionMovies() {
-	return renderMovies("Action Movies", hooks.useActionMovies);
+	return renderMovies("Action Movies", actionMoviesResource);
 }
 function ComedyMovies() {
-	return renderMovies("Comedy Movies", hooks.useComedyMovies);
+	return renderMovies("Comedy Movies", comedyMoviesResource);
 }
 function HorrorMovies() {
-	return renderMovies("Horror Movies", hooks.useHorrorMovies);
+	return renderMovies("Horror Movies", horrorMoviesResource);
 }
 function RomanceMovies() {
-	return renderMovies("Romance Movies", hooks.useRomanceMovies);
+	return renderMovies("Romance Movies", romanceMoviesResource);
 }
 function DocumentMovies() {
-	return renderMovies("Document Movies", hooks.useDocumentMovies);
+	return renderMovies("Document Movies", documentMoviesResource);
 }
 
 const movieTypes = {
