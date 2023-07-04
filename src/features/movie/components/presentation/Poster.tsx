@@ -9,11 +9,17 @@ export type Props = {
 
 export function Poster({ movie, large = false }: Props) {
 	const path = large ? movie.posterPath : movie.backdropPath;
-	const largeClassName = large ? styles["Poster-large"] : "";
+	if (path === null) {
+		return null;
+	}
+
+	const className = large
+		? `${styles.Poster} ${styles["Poster-large"]}`
+		: styles.Poster;
 
 	return (
 		<img
-			className={`${styles.Poster} ${largeClassName}`}
+			className={className}
 			src={`${TMDB_IMAGE_BASE_URL}${path}`}
 			alt={movie.name}
 			loading="lazy"

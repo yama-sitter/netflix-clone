@@ -1,7 +1,6 @@
-import { Suspense, PropsWithChildren } from "react";
+import { Suspense } from "react";
 import { Movies as PresentationalMovies } from "../presentation/Movies";
 import * as api from "../../api";
-import type { MoviesResource } from "../../types";
 
 const netflixOriginalMoviesResource = api.fetchNetflixOriginalMovies();
 const trendMoviesResource = api.fetchTrendMovies();
@@ -12,60 +11,52 @@ const horrorMoviesResource = api.fetchHorrorMovies();
 const romanceMoviesResource = api.fetchRomanceMovies();
 const documentMoviesResource = api.fetchDocumentMovies();
 
-function MoviesWrapper({ children }: PropsWithChildren) {
-	return <Suspense fallback={<div>loading...</div>}>{children}</Suspense>;
-}
-
-function renderMovies(title: string, resource: MoviesResource, large = false) {
-	return (
-		<MoviesWrapper>
-			<PresentationalMovies title={title} resource={resource} large={large} />
-		</MoviesWrapper>
-	);
-}
-
-export function NetflixOriginalMovies() {
-	return renderMovies("Netflix Original Movies", netflixOriginalMoviesResource);
-}
-
-function TrendMovies() {
-	return renderMovies("Trend Movies", trendMoviesResource);
-}
-function TopRatedMovies() {
-	return renderMovies("Top Rated Movies", topRatedMoviesResource, true);
-}
-function ActionMovies() {
-	return renderMovies("Action Movies", actionMoviesResource);
-}
-function ComedyMovies() {
-	return renderMovies("Comedy Movies", comedyMoviesResource);
-}
-function HorrorMovies() {
-	return renderMovies("Horror Movies", horrorMoviesResource);
-}
-function RomanceMovies() {
-	return renderMovies("Romance Movies", romanceMoviesResource);
-}
-function DocumentMovies() {
-	return renderMovies("Document Movies", documentMoviesResource);
-}
-
-const movieTypes = {
-	"netflix-original": <NetflixOriginalMovies />,
-	trend: <TrendMovies />,
-	"top-rated": <TopRatedMovies />,
-	action: <ActionMovies />,
-	comedy: <ComedyMovies />,
-	horror: <HorrorMovies />,
-	romance: <RomanceMovies />,
-	document: <DocumentMovies />,
+const resourceMap = {
+	"netflix-original": {
+		title: "Netflix Original Movies",
+		resource: netflixOriginalMoviesResource,
+	},
+	trend: {
+		title: "Trend Movies",
+		resource: trendMoviesResource,
+	},
+	"top-rated": {
+		title: "Top Rated Movies",
+		resource: topRatedMoviesResource,
+	},
+	action: {
+		title: "Action Movies",
+		resource: actionMoviesResource,
+	},
+	comedy: {
+		title: "Comedy Movies",
+		resource: comedyMoviesResource,
+	},
+	horror: {
+		title: "Horror Movies",
+		resource: horrorMoviesResource,
+	},
+	romance: {
+		title: "Horror Movies",
+		resource: romanceMoviesResource,
+	},
+	document: {
+		title: "Document Movies",
+		resource: documentMoviesResource,
+	},
 } as const;
 
-export type Type = keyof typeof movieTypes;
+export type Type = keyof typeof resourceMap;
 export type Props = {
 	type: Type;
+	large?: boolean;
 };
 
-export function Movies({ type }: Props) {
-	return movieTypes[type];
+export function Movies({ type, large }: Props) {
+	const { title, resource } = resourceMap[type];
+	return (
+		<Suspense fallback={<div>loading...</div>}>
+			<PresentationalMovies title={title} resource={resource} large={large} />
+		</Suspense>
+	);
 }
