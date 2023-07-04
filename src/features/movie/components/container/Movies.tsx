@@ -16,10 +16,10 @@ function MoviesWrapper({ children }: PropsWithChildren) {
 	return <Suspense fallback={<div>loading...</div>}>{children}</Suspense>;
 }
 
-function renderMovies(title: string, resource: MoviesResource) {
+function renderMovies(title: string, resource: MoviesResource, large = false) {
 	return (
 		<MoviesWrapper>
-			<PresentationalMovies title={title} resource={resource} />
+			<PresentationalMovies title={title} resource={resource} large={large} />
 		</MoviesWrapper>
 	);
 }
@@ -32,7 +32,7 @@ function TrendMovies() {
 	return renderMovies("Trend Movies", trendMoviesResource);
 }
 function TopRatedMovies() {
-	return renderMovies("Top Rated Movies", topRatedMoviesResource);
+	return renderMovies("Top Rated Movies", topRatedMoviesResource, true);
 }
 function ActionMovies() {
 	return renderMovies("Action Movies", actionMoviesResource);

@@ -1,12 +1,24 @@
 import { MoviesResource } from "../../types";
+import { Poster } from "./Poster";
+import styles from "./Movies.module.scss";
 
 export type Props = {
 	title: string;
 	resource: MoviesResource;
-	isLargeRow?: string;
+	large?: boolean;
 };
 
-export function Movies({ title, resource }: Props) {
-	console.log(resource.getOrThrow());
-	return <div className="Row" />;
+export function Movies({ title, resource, large = false }: Props) {
+	const movies = resource.getOrThrow();
+
+	return (
+		<div className={styles.Movies}>
+			<h2>{title}</h2>
+			<div className={styles["Movies-posters"]}>
+				{movies.map((movie) => (
+					<Poster key={movie.id} movie={movie} large={large} />
+				))}
+			</div>
+		</div>
+	);
 }

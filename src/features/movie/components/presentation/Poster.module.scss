@@ -1,0 +1,20 @@
+.Poster {
+  aspect-ratio: 1.414 / 1;
+  object-fit: contain;
+  max-height: 100px;
+  width: 100%;
+  transition: transform 450ms;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  &-large {
+  aspect-ratio: 1 / 1.414;
+    min-height: 250px;
+
+    &:hover {
+      transform: scale(1.09);
+    }
+  }
+}

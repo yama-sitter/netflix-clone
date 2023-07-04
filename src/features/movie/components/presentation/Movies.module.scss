@@ -1,0 +1,19 @@
+.Movies {
+  margin-left: 20px;
+  // color: #fff;
+
+  &-posters {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 20px;
+
+    & > img {
+      margin: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
