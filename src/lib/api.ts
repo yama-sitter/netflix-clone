@@ -1,3 +1,4 @@
+import { TMDB_API_KEY, TMDB_API_BASE_URL } from "../config";
 import { createClient, Config } from "./api-client";
 import { MovieResponse, MovieResponseRow, MoviesResource } from "../types";
 import { Loadable } from "./loadable";
@@ -6,14 +7,11 @@ type Params = {
 	api_key?: string;
 } & Config["params"];
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = "https://api.themoviedb.org/3";
-
 const client = createClient({
-	baseURL: BASE_URL,
+	baseURL: TMDB_API_BASE_URL,
 });
 const defaultParams: Params = {
-	api_key: API_KEY,
+	api_key: TMDB_API_KEY,
 };
 
 function convertResultToMovie({
