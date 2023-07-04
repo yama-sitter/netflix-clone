@@ -1,6 +1,6 @@
 import { Suspense, PropsWithChildren } from "react";
 import { Movies as PresentationalMovies } from "../presentation/Movies";
-import * as api from "../../lib/api";
+import * as api from "../../api";
 import type { MoviesResource } from "../../types";
 
 const netflixOriginalMoviesResource = api.fetchNetflixOriginalMovies();

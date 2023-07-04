@@ -1,4 +1,4 @@
-import { Movies } from "./components/container/Movies";
+import { Movies } from "./features/movie/components/container/Movies";
 
 function App() {
 	return (
