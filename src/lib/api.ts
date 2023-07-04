@@ -1,10 +1,5 @@
 import { createClient, Config } from "./api-client";
-import {
-	MovieResponse,
-	MovieResponseRow,
-	Movie,
-	MoviesResource,
-} from "../types";
+import { MovieResponse, MovieResponseRow, MoviesResource } from "../types";
 import { Loadable } from "./loadable";
 
 type Params = {
