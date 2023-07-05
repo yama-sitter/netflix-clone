@@ -9,7 +9,7 @@ export type Props = {
 };
 
 export function Movies({ title, resource, large = false }: Props) {
-	const movies = resource.getOrThrow();
+	const movies = resource.read();
 
 	if (movies.length === 0) {
 		return null;

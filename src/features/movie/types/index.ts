@@ -1,5 +1,5 @@
 import { SnakeToCamel } from "../../../types";
-import { Loadable } from "../../../lib/loadable";
+import type { Resource } from "../../../lib/resource";
 
 export type APIResponse<T> = {
 	page: number;
@@ -17,4 +17,4 @@ export type MovieResponseRow = {
 export type MovieResponse = APIResponse<MovieResponseRow[]>;
 export type Movie = SnakeToCamel<MovieResponseRow>;
 
-export type MoviesResource = Loadable<Movie[]>;
+export type MoviesResource = Resource<Movie[]>;

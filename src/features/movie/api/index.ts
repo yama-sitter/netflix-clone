@@ -1,7 +1,7 @@
 import { TMDB_API_KEY, TMDB_API_BASE_URL } from "../../../config";
 import { createClient, Params as APIParams } from "../../../lib/api";
 import { MovieResponse, MovieResponseRow, MoviesResource } from "../types";
-import { Loadable } from "../../../lib/loadable";
+import { Resource } from "../../../lib/resource";
 
 type Params = {
 	api_key?: string;
@@ -41,7 +41,7 @@ function fetchMovies(path: string, params: Params = {}): MoviesResource {
 			},
 		})
 		.then(({ data }) => data.results.map(convertResultToMovie));
-	return new Loadable(promise);
+	return new Resource(promise);
 }
 
 export function fetchNetflixOriginalMovies() {

@@ -1,4 +1,4 @@
-export type LoadableState<T> =
+export type ResourceState<T> =
 	| {
 			status: "pending";
 			promise: Promise<T>;
@@ -12,8 +12,8 @@ export type LoadableState<T> =
 			error: unknown;
 	  };
 
-export class Loadable<T> {
-	#state: LoadableState<T>;
+export class Resource<T> {
+	#state: ResourceState<T>;
 
 	constructor(promise: Promise<T>) {
 		this.#state = {
@@ -37,7 +37,7 @@ export class Loadable<T> {
 		};
 	}
 
-	getOrThrow(): T {
+	read(): T | never {
 		switch (this.#state.status) {
 			case "pending":
 				throw this.#state.promise;
