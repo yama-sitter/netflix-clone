@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import { Movies as PresentationalMovies } from "../presentation/Movies";
+import { MoviesLayout } from "../presentation/MoviesLayout";
 import * as api from "../../api";
 
 const netflixOriginalMoviesResource = api.fetchNetflixOriginalMovies();
@@ -37,7 +37,7 @@ const resourceMap = {
 		resource: horrorMoviesResource,
 	},
 	romance: {
-		title: "Horror Movies",
+		title: "Romance Movies",
 		resource: romanceMoviesResource,
 	},
 	document: {
@@ -55,8 +55,8 @@ export type Props = {
 export function Movies({ type, large }: Props) {
 	const { title, resource } = resourceMap[type];
 	return (
-		<Suspense fallback={<div>loading...</div>}>
-			<PresentationalMovies title={title} resource={resource} large={large} />
-		</Suspense>
+		<MoviesLayout title={title} large={large}>
+			<PresentationalMovies resource={resource} large={large} />
+		</MoviesLayout>
 	);
 }

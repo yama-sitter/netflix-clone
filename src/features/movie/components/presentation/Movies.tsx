@@ -3,26 +3,22 @@ import { Poster } from "./Poster";
 import styles from "./Movies.module.scss";
 
 export type Props = {
-	title: string;
 	resource: MoviesResource;
 	large?: boolean;
 };
 
-export function Movies({ title, resource, large = false }: Props) {
+export function Movies({ resource, large = false }: Props) {
 	const movies = resource.read();
 
 	if (movies.length === 0) {
-		return null;
+		throw new Error("No data available.");
 	}
 
 	return (
 		<div className={styles.Movies}>
-			<h2>{title}</h2>
-			<div className={styles["Movies-posters"]}>
-				{movies.map((movie) => (
-					<Poster key={movie.id} movie={movie} large={large} />
-				))}
-			</div>
+			{movies.map((movie) => (
+				<Poster key={movie.id} movie={movie} large={large} />
+			))}
 		</div>
 	);
 }
