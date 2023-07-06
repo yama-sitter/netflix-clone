@@ -10,9 +10,6 @@ export function MoviesFallback({ message, large = false }: Props) {
 		? `${styles.MoviesFallback} ${styles["MoviesFallback-large"]}`
 		: styles.MoviesFallback;
 
-	console.log(`large: ${large}`);
-	console.log(`className: ${className}`);
-
 	return (
 		<div className={className}>
 			<p>{message}</p>

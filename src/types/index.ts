@@ -7,3 +7,6 @@ export type SnakeToCamel<T extends object> = {
 		? SnakeToCamel<T[K]>
 		: T[K];
 };
+
+export type PartiallyPartial<T, K extends keyof T> = Omit<T, K> &
+	Required<Pick<T, K>>;

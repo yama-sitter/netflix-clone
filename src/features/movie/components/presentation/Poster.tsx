@@ -1,4 +1,7 @@
+import { Suspense } from "react";
 import { TMDB_IMAGE_BASE_URL } from "../../../../config";
+import { SuspenseImage } from "../../../../components/SuspenseImage";
+import { PosterFallback } from "./PosterFallback";
 import { Movie } from "../../types";
 import styles from "./Poster.module.scss";
 
@@ -18,11 +21,13 @@ export function Poster({ movie, large = false }: Props) {
 		: styles.Poster;
 
 	return (
-		<img
-			className={className}
-			src={`${TMDB_IMAGE_BASE_URL}${path}`}
-			alt={movie.name}
-			loading="lazy"
-		/>
+		<Suspense fallback={<PosterFallback large={large} />}>
+			<SuspenseImage
+				className={className}
+				src={`${TMDB_IMAGE_BASE_URL}${path}`}
+				alt={movie.name}
+				loading="lazy"
+			/>
+		</Suspense>
 	);
 }
