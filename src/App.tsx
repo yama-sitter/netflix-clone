@@ -8,9 +8,7 @@ function App() {
       <Movies type="netflix-original" />
       <Movies type="top-rated" large />
       <Movies type="trend" />
-      <Movies type="action" />
       <Movies type="comedy" />
-      <Movies type="horror" />
       <Movies type="romance" />
       <Movies type="document" />
     </div>
