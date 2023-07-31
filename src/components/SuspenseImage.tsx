@@ -3,11 +3,11 @@ import { PartiallyPartial } from "../types";
 import { ImageResource } from "../lib/image-resource";
 
 export type Props = PartiallyPartial<
-	ImgHTMLAttributes<HTMLImageElement>,
-	"src" | "alt"
+  ImgHTMLAttributes<HTMLImageElement>,
+  "src" | "alt"
 >;
 
-export function SuspenseImage(props: Props) {
-	ImageResource.create(props.src).read();
-	return <img {...props} />;
+export function SuspenseImage({ src, alt, ...props }: Props) {
+  ImageResource.create(src).read();
+  return <img alt={alt} {...props} />;
 }
