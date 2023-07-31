@@ -9,5 +9,5 @@ export type Props = PartiallyPartial<
 
 export function SuspenseImage({ src, alt, ...props }: Props) {
   ImageResource.create(src).read();
-  return <img alt={alt} {...props} />;
+  return <img src={src} alt={alt} {...props} />;
 }
