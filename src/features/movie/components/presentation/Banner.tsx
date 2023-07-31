@@ -1,5 +1,5 @@
 import { MoviesResource, Movie } from "../../types";
-import { TMDB_IMAGE_BASE_URL } from "../../../../config"
+import { TMDB_IMAGE_BASE_URL } from "../../../../config";
 import styles from "./Banner.module.scss";
 import { truncate } from "../../../../lib/truncate";
 
@@ -16,9 +16,9 @@ export function Banner({ resource }: Props) {
   const movies = resource.read();
   const movie = getRandomly(movies);
 
-  const imagePath = `${TMDB_IMAGE_BASE_URL}${movie.backdropPath}`
-  const title = movie.title || movie.name || movie.originalName
-  const overview = truncate(movie.overview, 150)
+  const imagePath = `${TMDB_IMAGE_BASE_URL}${movie.backdropPath}`;
+  const title = movie.title || movie.name || movie.originalName;
+  const overview = truncate(movie.overview, 150);
 
   return (
     <header
