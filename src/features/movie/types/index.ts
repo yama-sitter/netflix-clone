@@ -13,6 +13,7 @@ export type MovieResponseRow = {
   original_name: string;
   poster_path: string;
   backdrop_path: string;
+  overview: string;
 };
 export type MovieResponse = APIResponse<MovieResponseRow[]>;
 export type Movie = SnakeToCamel<MovieResponseRow>;

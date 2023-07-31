@@ -21,6 +21,7 @@ function convertResultToMovie({
   original_name: originalName,
   poster_path: posterPath,
   backdrop_path: backdropPath,
+  overview,
 }: MovieResponseRow) {
   return {
     id,
@@ -29,6 +30,7 @@ function convertResultToMovie({
     originalName,
     posterPath,
     backdropPath,
+    overview,
   };
 }
 
