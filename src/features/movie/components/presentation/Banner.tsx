@@ -16,7 +16,7 @@ export function Banner({ resource }: Props) {
   const movies = resource.read();
   const movie = getRandomly(movies);
 
-  const imagePath = `${TMDB_IMAGE_BASE_URL}${movie.backdropPath}`;
+  const imagePath = `${TMDB_IMAGE_BASE_URL}${movie?.backdropPath || ""}`;
   const title = movie.title || movie.name || movie.originalName;
   const overview = truncate(movie.overview, 150);
 

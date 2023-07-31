@@ -12,7 +12,7 @@ export type MovieResponseRow = {
   title: string;
   original_name: string;
   poster_path: string;
-  backdrop_path: string;
+  backdrop_path?: string;
   overview: string;
 };
 export type MovieResponse = APIResponse<MovieResponseRow[]>;
